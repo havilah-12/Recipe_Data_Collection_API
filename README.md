@@ -2,7 +2,7 @@
 
 ## 🍽️ Recipes Web App
 This is a full-stack application where users can view recipes. The backend is built using FastAPI and MySQL, and the frontend is built with React.js.
-![Uploading image.png…]()
+
 
 ### Project Structure
 ## RECIPES/
