@@ -28,10 +28,10 @@ uvicorn main:app --reload
 
 ### 📡 API Endpoints
 
-📄 GET /recipes/
+📄 GET /recipes/  : 
 Returns a list of all stored recipes.
 
-📄 GET /recipes/search
+📄 GET /recipes/search  :
 Returns a list of all stored recipes by filtering in each category (calories , title, cuisine, total time , rating)
 
 
