@@ -4,7 +4,8 @@
 ### This is a full-stack application where users can view recipes. The backend is built using FastAPI and MySQL, and the frontend is built with React.js (vite + react)
 
 
-## Project Structure
+## 📂 Project Structure
+ 
 #### RECIPES/
 #### ├── backend/      → FastAPI backend with MySQL
 #### ├── frontend/     → React frontend
@@ -12,8 +13,8 @@
 ## 🧰 Tech Stack
 #### Backend: Python, FastAPI
 #### Database: MySQL
-#### Frontend: Recast (Vite + React)
-#### Styling: Tailwind CSS
+#### Frontend: React (Vite + React)
+#### Styling: CSS, Tailwind CSS
 
 ## ⚙️ Backend Setup
 1. Create and activate virtual environment:
