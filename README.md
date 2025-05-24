@@ -1,7 +1,7 @@
 
 
 ## 🍽️ Recipes Web App
-This is a full-stack application where users can view recipes. The backend is built using FastAPI and MySQL, and the frontend is built with React.js.
+### This is a full-stack application where users can view recipes. The backend is built using FastAPI and MySQL, and the frontend is built with React.js (vite + react)
 
 
 ## Project Structure
@@ -10,28 +10,28 @@ This is a full-stack application where users can view recipes. The backend is bu
 #### ├── frontend/     → React frontend
 
 ## 🧰 Tech Stack
-Backend: Python, FastAPI
-Database: MySQL
-Frontend: Recast (Vite + React)
-Styling: Tailwind CSS
+#### Backend: Python, FastAPI
+#### Database: MySQL
+#### Frontend: Recast (Vite + React)
+#### Styling: Tailwind CSS
 
 ## ⚙️ Backend Setup
 1. Create and activate virtual environment:
 #### cd backend
 #### python -m venv env
-source env/bin/activate      # on Linux/Mac
-env\Scripts\activate         # on Windows
+#### source env/bin/activate      #### on Linux/Mac
+#### env\Scripts\activate         #### on Windows
 2. Install dependencies:
-pip install -r requirements.txt
+#### pip install -r requirements.txt
 3. Set up MySQL
 Make sure you have MySQL installed and running.
 Create a database named recipes_db.
 In MySQL shell or GUI:
-CREATE DATABASE recipes_db;
+#### CREATE DATABASE recipes_db;
 4. Update your connection URL in database.py:
-DATABASE_URL = "mysql+pymysql://root@localhost:3306/recipes_db" - replace with your database url
+#### DATABASE_URL = "mysql+pymysql://root@localhost:3306/recipes_db" - replace with your database url
 5. Run the backend server:
-uvicorn main:app --reload
+#### uvicorn main:app --reload
 
 ### 📡 API Endpoints
 
