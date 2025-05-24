@@ -19,8 +19,8 @@
 1. Create and activate virtual environment:
 #### cd backend
 #### python -m venv env
-#### source env/bin/activate      #### on Linux/Mac
-#### env\Scripts\activate         #### on Windows
+#### source env/bin/activate - Linux/Mac
+#### env\Scripts\activate    - Windows
 2. Install dependencies:
 #### pip install -r requirements.txt
 3. Set up MySQL
@@ -53,6 +53,6 @@ This will start the app at http://localhost:5173.
 
 ### 🔗 Connecting Frontend to Backend
 In your React components (like recipedetails.jsx), you can fetch data like this:
-fetch('http://localhost:8000/recipes/')
-  .then(res => res.json())
-  .then(data => console.log(data));
+#### fetch('http://localhost:8000/recipes/')
+#### .then(res => res.json())
+#### .then(data => console.log(data));
