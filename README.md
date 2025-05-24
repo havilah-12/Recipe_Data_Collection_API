@@ -59,8 +59,7 @@ This will start the app at http://localhost:5173.
 
 ### 🔗 Connecting Frontend to Backend
 In your React components (like recipedetails.jsx), you can fetch data like this:
-#### fetch('http://localhost:8000/recipes/')
-#### .then(res => res.json())
-#### .then(data => console.log(data));
+#### axios.get(http://localhost:8000/api/recipes?page=${page}&limit=${limit})
+####      .then(res => console.log(res.data.data));
 
 #### logics used in project are included in python_logics.txt
