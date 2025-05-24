@@ -1,0 +1,106 @@
+# 1. Database Initialization Logic
+# create_db.py
+Base.metadata.create_all(bind=engine)
+
+# 2. SQL Script: recipes_db.sql
+-- Create the database if it doesn't exist
+CREATE DATABASE IF NOT EXISTS recipes_db;
+USE recipes_db;
+
+-- Create the recipes table
+CREATE TABLE IF NOT EXISTS recipes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cuisine VARCHAR(255),
+    title VARCHAR(255),
+    rating FLOAT DEFAULT NULL,
+    prep_time INT DEFAULT NULL,
+    cook_time INT DEFAULT NULL,
+    total_time INT DEFAULT NULL,
+    description TEXT,
+    nutrients JSON,
+    serves VARCHAR(255),
+    INDEX idx_title (title),
+    INDEX idx_rating (rating)
+);
+
+# 3. SQLAlchemy Configuration (MySQL)
+# database.py
+DATABASE_URL = "mysql+pymysql://root:<password>@localhost:3306/recipes_db"
+engine = create_engine(DATABASE_URL)
+SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
+Base = declarative_base()
+
+
+# 4. Recipe Model Definition
+# models.py
+class Recipe(Base):
+    __tablename__ = 'recipes'
+    id = Column(Integer, primary_key=True, index=True)
+    cuisine = Column(String)
+    title = Column(String)
+    rating = Column(Float, nullable=True)
+    prep_time = Column(Integer, nullable=True)
+    cook_time = Column(Integer, nullable=True)
+    total_time = Column(Integer, nullable=True)
+    description = Column(Text)
+    nutrients = Column(JSON)
+    serves = Column(String)
+
+
+# 5. Data Parsing from JSON to DB
+# parser.py
+for item in data.values():
+    recipe = Recipe(
+        cuisine=item['cuisine'],
+        title=item['title'],
+        rating=None if item['rating'] == "NaN" else item['rating'],
+        prep_time=None if item['prep_time'] == "NaN" else item['prep_time'],
+        cook_time=None if item['cook_time'] == "NaN" else item['cook_time'],
+        total_time=None if item['total_time'] == "NaN" else item['total_time'],
+        description=item['description'],
+        nutrients=item['nutrients'],
+        serves=item['serves']
+    )
+    db.add(recipe)
+db.commit()
+
+
+# 6. Paginated Recipe Listing Endpoint
+# main.py
+@app.get("/api/recipes")
+def get_recipes(page: int = 1, limit: int = 10, db: Session = Depends(get_db)):
+    offset = (page - 1) * limit
+    query = db.query(Recipe).order_by(Recipe.rating.desc())
+    total = query.count()
+    recipes = query.offset(offset).limit(limit).all()
+    return {
+        "page": page,
+        "limit": limit,
+        "total": total,
+        "data": [r.__dict__ for r in recipes]
+    }
+
+
+# 7. Filtered Search with Operator Support
+# main.py
+@app.get("/api/recipes/search")
+def search_recipes(...):
+    def parse_op_val(param: str):
+        match = re.match(r"^(>=|<=|>|<|=)?\s*(\d+(\.\d+)?)$", param.strip())
+        op = match.group(1) or "="
+        val = float(match.group(2))
+        return op, val
+
+    if title:
+        query = query.filter(func.lower(Recipe.title).ilike(f"%{title.strip().lower()}%"))
+
+    if calories:
+        op, val = parse_op_val(calories)
+        expr = cast(
+            text("CAST(REPLACE(JSON_UNQUOTE(nutrients->'$.calories'), ' kcal', '') AS UNSIGNED)"),
+            Integer
+        )
+        if op == ">": query = query.filter(expr > val)
+        elif op == "<=": query = query.filter(expr <= val)
+        # ... other conditions
+        # Applied filters for total_time and rating similarly
