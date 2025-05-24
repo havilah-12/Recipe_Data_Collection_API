@@ -33,12 +33,12 @@ In MySQL shell or GUI:
 5. Run the backend server:
 #### uvicorn main:app --reload
 
-### 📡 API Endpoints
+### 📡 API Testing 
 
-📄 GET /recipes/  : 
+📄 GET http://127.0.0.1:8000/api/recipes: 
 Returns a list of all stored recipes.
 
-📄 GET /recipes/search  :
+📄 GET http://127.0.0.1:8000/api/recipes/search  :
 Returns a list of all stored recipes by filtering in each category (calories , title, cuisine, total time , rating)
 
 
@@ -56,3 +56,4 @@ In your React components (like recipedetails.jsx), you can fetch data like this:
 #### fetch('http://localhost:8000/recipes/')
 #### .then(res => res.json())
 #### .then(data => console.log(data));
+
