@@ -1,11 +1,10 @@
 
 
-```markdown
 # 🍽️ Recipes Web App
 
 A full-stack application where users can view and search recipes. The backend is built using **FastAPI** and **MySQL**, and the frontend uses **React.js** (Vite + React).
 
----
+
 
 ## 📂 Project Structure
 
