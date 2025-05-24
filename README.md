@@ -16,7 +16,7 @@ RECIPES/
 
 ````
 
----
+
 
 ## 🧰 Tech Stack
 
@@ -25,7 +25,7 @@ RECIPES/
 - **Frontend**: React (Vite)  
 - **Styling**: CSS, Tailwind CSS  
 
----
+
 
 ## ⚙️ Backend Setup
 
@@ -64,7 +64,6 @@ RECIPES/
    uvicorn main:app --reload
    ```
 
----
 
 ## 📡 API Endpoints
 
@@ -88,7 +87,7 @@ Searches recipes with flexible filters:
 * `rating`, `calories`, `total_time` → supports comparison operators (`>`, `<`, `>=`, `<=`, `=`)
 * `cuisine` → exact match
 
----
+
 
 ## 🖥️ Frontend Setup
 
@@ -112,7 +111,7 @@ Searches recipes with flexible filters:
 
    App runs on: [http://localhost:5173](http://localhost:5173)
 
----
+
 
 ## 🔗 Connecting Frontend to Backend
 
@@ -123,7 +122,7 @@ axios.get(`http://localhost:8000/api/recipes?page=${page}&limit=${limit}`)
      .then(res => console.log(res.data.data));
 ```
 
----
+
 
 ## 🧠 Logics Used
 
