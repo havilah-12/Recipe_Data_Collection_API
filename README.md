@@ -62,4 +62,4 @@ In your React components (like recipedetails.jsx), you can fetch data like this:
 #### axios.get(http://localhost:8000/api/recipes?page=${page}&limit=${limit})
 ####      .then(res => console.log(res.data.data));
 
-#### logics used in project are included in python_logics.txt
+#### 🧠 logics used in project are included in python_logics.txt
