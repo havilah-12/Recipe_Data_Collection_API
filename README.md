@@ -37,7 +37,7 @@ In MySQL shell or GUI:
 
 📄 GET http://127.0.0.1:8000/api/recipes: 
 Returns a list of all stored recipes.
-##### ex: - GET http://127.0.0.1:8000/api/recipes?page=1&limit=10 
+- GET http://127.0.0.1:8000/api/recipes?page=1&limit=10 
 ##### returns recipes from 1 to 10 
 
 📄 GET http://127.0.0.1:8000/api/recipes/search  :
