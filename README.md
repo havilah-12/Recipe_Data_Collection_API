@@ -63,3 +63,4 @@ In your React components (like recipedetails.jsx), you can fetch data like this:
 #### .then(res => res.json())
 #### .then(data => console.log(data));
 
+#### logics used in project are included in python_logics.txt
