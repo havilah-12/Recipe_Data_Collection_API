@@ -1,65 +1,141 @@
 
 
-## 🍽️ Recipes Web App
-### This is a full-stack application where users can view recipes. The backend is built using FastAPI and MySQL, and the frontend is built with React.js (vite + react)
+```markdown
+# 🍽️ Recipes Web App
 
+A full-stack application where users can view and search recipes. The backend is built using **FastAPI** and **MySQL**, and the frontend uses **React.js** (Vite + React).
+
+---
 
 ## 📂 Project Structure
- 
-#### RECIPES/
-#### ├── backend/      → FastAPI backend with MySQL
-#### ├── frontend/     → React frontend
+
+```
+
+RECIPES/
+├── backend/      → FastAPI backend with MySQL
+├── frontend/     → React frontend
+
+````
+
+---
 
 ## 🧰 Tech Stack
-#### Backend: Python, FastAPI
-#### Database: MySQL
-#### Frontend: React (Vite + React)
-#### Styling: CSS, Tailwind CSS
+
+- **Backend**: Python, FastAPI  
+- **Database**: MySQL  
+- **Frontend**: React (Vite)  
+- **Styling**: CSS, Tailwind CSS  
+
+---
 
 ## ⚙️ Backend Setup
-1. Create and activate virtual environment:
-#### cd backend
-#### python -m venv env
-#### source env/bin/activate - Linux/Mac
-#### env\Scripts\activate    - Windows
+
+1. **Create and activate virtual environment**:
+   ```bash
+   cd backend
+   python -m venv env
+   source env/bin/activate      # Linux/Mac
+   env\Scripts\activate         # Windows
+````
+
+2. **Install dependencies**:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Set up MySQL**:
+
+   * Ensure MySQL is installed and running
+   * Create a database:
+
+     ```sql
+     CREATE DATABASE recipes_db;
+     ```
+
+4. **Update connection URL** in `database.py`:
+
+   ```python
+   DATABASE_URL = "mysql+pymysql://root@localhost:3306/recipes_db"
+   ```
+
+5. **Run the FastAPI server**:
+
+   ```bash
+   uvicorn main:app --reload
+   ```
+
+---
+
+## 📡 API Endpoints
+
+### 🔹 GET All Recipes (Paginated)
+
+```http
+GET /api/recipes?page=1&limit=10
+```
+
+Returns recipes in descending order of rating.
+
+### 🔹 GET Filtered Recipes
+
+```http
+GET /api/recipes/search?title=Pie&rating=4.5
+```
+
+Searches recipes with flexible filters:
+
+* `title` → partial match (case-insensitive)
+* `rating`, `calories`, `total_time` → supports comparison operators (`>`, `<`, `>=`, `<=`, `=`)
+* `cuisine` → exact match
+
+---
+
+## 🖥️ Frontend Setup
+
+1. Open a new terminal and navigate:
+
+   ```bash
+   cd frontend
+   ```
+
 2. Install dependencies:
-#### pip install -r requirements.txt
-3. Set up MySQL
-Make sure you have MySQL installed and running.
-Create a database named recipes_db.
-In MySQL shell or GUI:
-#### CREATE DATABASE recipes_db;
-4. Update your connection URL in database.py:
-#### DATABASE_URL = "mysql+pymysql://root@localhost:3306/recipes_db" - replace with your database url
-5. Run the backend server:
-#### uvicorn main:app --reload
 
-### 📡 API Testing 
+   ```bash
+   npm install
+   ```
 
-📄 GET http://127.0.0.1:8000/api/recipes: 
-Returns a list of all stored recipes.
-- GET http://127.0.0.1:8000/api/recipes?page=1&limit=10 
-##### returns recipes from 1 to 10 
+3. Run the React app:
 
-📄 GET http://127.0.0.1:8000/api/recipes/search  :
-Returns a list of all stored recipes by filtering in each category (calories , title, cuisine, total time , rating)
-- GET http://127.0.0.1:8000/api/recipes/search?title=Pie&rating=4.5
-##### returns recipes titled with pie and having rating above or equal to 4.5
+   ```bash
+   npm run dev
+   ```
+
+   App runs on: [http://localhost:5173](http://localhost:5173)
+
+---
+
+## 🔗 Connecting Frontend to Backend
+
+In your React component (e.g., `RecipeDetails.jsx`):
+
+```js
+axios.get(`http://localhost:8000/api/recipes?page=${page}&limit=${limit}`)
+     .then(res => console.log(res.data.data));
+```
+
+---
+
+## 🧠 Logics Used
+
+Refer to [`python_logics.txt`](./backend/python_logics.txt) for detailed backend logic, including:
+
+* SQLAlchemy model definition
+* JSON parsing and database insertion
+* Pagination and search filters with operators
+* Nutrient extraction from JSON fields using SQL functions
 
 
+### ✨ Happy Cooking & Coding!
 
-### 🖥️ Frontend Setup
-1. Open another terminal and go to the frontend folder:
-cd frontend
-2. Install dependencies:
-npm install
-3. Run the development server:
-npm run dev
-This will start the app at http://localhost:5173.
 
-### 🔗 Connecting Frontend to Backend
-In your React components (like recipedetails.jsx), you can fetch data like this:
-#### axios.get(http://localhost:8000/api/recipes?page=${page}&limit=${limit})
-####      .then(res => console.log(res.data.data));
-
-#### 🧠 logics used in project are included in python_logics.txt
