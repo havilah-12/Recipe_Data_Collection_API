@@ -37,9 +37,14 @@ In MySQL shell or GUI:
 
 📄 GET http://127.0.0.1:8000/api/recipes: 
 Returns a list of all stored recipes.
+##### ex: - GET http://127.0.0.1:8000/api/recipes?page=1&limit=10 
+##### returns recipes from 1 to 10 
 
 📄 GET http://127.0.0.1:8000/api/recipes/search  :
 Returns a list of all stored recipes by filtering in each category (calories , title, cuisine, total time , rating)
+- GET http://127.0.0.1:8000/api/recipes/search?title=Pie&rating=4.5
+##### returns recipes titled with pie and having rating above or equal to 4.5
+
 
 
 ### 🖥️ Frontend Setup
