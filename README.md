@@ -35,7 +35,7 @@ RECIPES/
    python -m venv env
    source env/bin/activate      # Linux/Mac
    env\Scripts\activate         # Windows
-````
+
 
 2. **Install dependencies**:
 
